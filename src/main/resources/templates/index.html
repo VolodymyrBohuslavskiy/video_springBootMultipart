@@ -1,19 +1,25 @@
 <!DOCTYPE html>
 <html lang="uk" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>INDEX</title>
-</head>
+<span th:replace="~{donor::head(${fromControoler})}"></span>
 <body>
-<form th:action="@{'/add'}" method="post" th:object="${tel}">
-    <input type="text" th:field="*{contact.name}" placeholder="Name">
-    <input type="text" th:field="*{number}" placeholder="Tel">
+
+<form th:action="@{'/add'}" method="post" th:object="${contact}" enctype="multipart/form-data">
+    <input type="text" th:field="*{name}" placeholder="Name">
+    <!--!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
+    <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error !</p>
+    <!--!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
+    <input type="tel" th:field="*{tels}" placeholder="Tel">
+    <input type="file" th:field="*{img}">
     <input type="submit" value="Add">
 </form>
+
 
 <ul th:each="contact : ${all}">
     <li th:text="${contact.getName()}"></li>
     <p th:each="tel : ${contact.getTels()}" th:text="${tel.getNumber()}"></p>
+    <img th:src="${contact.getImg()}" alt="" height="200" width="200">
 </ul>
+<a href="/qwe">LOREM</a>
+<p th:text="#{foo.qwe}"></p>
 </body>
 </html>
