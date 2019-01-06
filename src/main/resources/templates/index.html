@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="uk" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>INDEX</title>
+</head>
+<body>
+<form th:action="@{'/add'}" method="post" th:object="${tel}">
+    <input type="text" th:field="*{contact.name}" placeholder="Name">
+    <input type="text" th:field="*{number}" placeholder="Tel">
+    <input type="submit" value="Add">
+</form>
+
+<ul th:each="contact : ${all}">
+    <li th:text="${contact.getName()}"></li>
+    <p th:each="tel : ${contact.getTels()}" th:text="${tel.getNumber()}"></p>
+</ul>
+</body>
+</html>
